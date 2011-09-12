@@ -1,0 +1,43 @@
+#! /bin/sh
+# Copyright 2011 AnyChart.Com Team
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+
+PREFIX=/usr/local
+JAVAC=javac
+JAR=jar
+
+options=$@
+arguments=($options)
+index=0
+for argument in $options
+  do
+    # Incrementing index
+    index=`expr $index + 1`
+
+    # The conditions
+    case $argument in
+      --prefix) PREFIX=${arguments[index]} ;;
+      --with-javac) JAVAC=${arguments[index]} ;;
+      --with-jar) JAR=${arguments[index]} ;;
+    esac
+  done
+
+sed "\
+s/@prefix@/$(echo $PREFIX | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')/g;\
+s/@javac@/$(echo $JAVAC | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')/g;\
+s/@jar@/$(echo $JAR | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')/g" Makefile.in > Makefile
+
+sed s/@path@/$(echo $PREFIX | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')\\/bin/g src/gjstags > bin/gjstags
+chmod +x bin/gjstags

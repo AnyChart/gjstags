@@ -1,0 +1,21 @@
+PREFIX=@prefix@
+JAVAC=@javac@
+JAR=@jar@
+
+compile:
+	mkdir -p classes
+	mkdir -p bin
+	$(JAVAC) -sourcepath src -classpath libs/compiler.jar -d classes src/com/anychart/gjstags/CommandLineRunner.java
+	$(JAR) cvfm bin/gjstags.jar src/META-INF/MANIFEST.MF -C classes .
+	rm -rf classes
+
+install:
+	cp bin/gjstags $(PREFIX)/bin/gjstags
+	cp bin/gjstags.jar $(PREFIX)/bin/gjstags.jar
+
+clean:
+	rm -rf bin/*
+	rm -rf classes/*
+	rm -f Makefile
+	rm -f $(PREFIX)/bin/gjstags
+	rm -f $(PREFIX)/bin/gjstags.jar
