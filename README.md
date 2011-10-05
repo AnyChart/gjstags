@@ -6,8 +6,7 @@ Works under Mac OS X or Linux.
 ## Installation
 ### Cloning source:
 ```
-git git://github.com/AnyChart/gjstags.git
-git checkout v1.0
+git clone git://github.com/AnyChart/gjstags.git
 ```
 ### Building:
 ```
