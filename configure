@@ -39,6 +39,7 @@ s/@prefix@/$(echo $PREFIX | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g
 s/@javac@/$(echo $JAVAC | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')/g;\
 s/@jar@/$(echo $JAR | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')/g" Makefile.in > Makefile
 
+rm -rf bin
 mkdir bin
 sed s/@path@/$(echo $PREFIX | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')\\/bin/g src/gjstags > bin/gjstags
 chmod +x bin/gjstags
