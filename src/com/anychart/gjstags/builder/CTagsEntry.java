@@ -21,6 +21,7 @@ import com.google.javascript.jscomp.NodeUtil;
 import com.google.javascript.rhino.JSDocInfo;
 import com.google.javascript.rhino.Token;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class CTagsEntry extends CTag {
         return meta;
     }
 
-    public static void generateFromEntry(List<CTagsEntry> tags, ITopLevelInfoProvider infoProvider, String name, SourceCodeTraversal.SourceCodeEntry entry) {
+    public static void generateFromEntry(List<CTagsEntry> tags, ITopLevelInfoProvider infoProvider, String name, SourceCodeTraversal.SourceCodeEntry entry, String baseDir) {
 
         CTagsEntryKind kind;
         String className = null;
@@ -87,6 +88,14 @@ public class CTagsEntry extends CTag {
         String packageName = null;
 
         String fileName = NodeUtil.getSourceName(entry.getValue());
+        if (baseDir != null) {
+            String absPath = new File(fileName).getAbsolutePath();
+            String absBaseDir = new File(baseDir).getAbsolutePath();
+            if (absPath.contains(absBaseDir)) {
+                fileName = absPath.substring(absPath.indexOf(absBaseDir) + absBaseDir.length()+1);
+            }
+        }
+
         int lineNumber = entry.getValue().getLineno();
 
         //class or interface method/prop

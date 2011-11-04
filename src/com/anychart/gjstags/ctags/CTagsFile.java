@@ -15,6 +15,8 @@
  */
 package com.anychart.gjstags.ctags;
 
+import com.anychart.gjstags.CommandLineRunner;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -34,7 +36,7 @@ public class CTagsFile {
                     "!_TAG_PROGRAM_AUTHOR\tAnyChart.Com Team\n" +
                     "!_TAG_PROGRAM_NAME\tgjstags\t//\n" +
                     "!_TAG_PROGRAM_URL\thttps://github.com/AnyChart/gjstags\t/official site/\n" +
-                    "!_TAG_PROGRAM_VERSION\t1.0\t//\n";
+                    "!_TAG_PROGRAM_VERSION\t"+ CommandLineRunner.VERSION+"\t//\n";
 
     private List<CTag> entries;
 

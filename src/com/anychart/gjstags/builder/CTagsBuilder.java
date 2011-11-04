@@ -64,7 +64,7 @@ public class CTagsBuilder implements ITopLevelInfoProvider {
         return this.tags.toArray(new CTagsEntry[this.tags.size()]);
     }
 
-    public void parseCTags() {
+    public void parseCTags(String baseDir) {
         this.classes = new ArrayList<String>();
         this.interfaces = new ArrayList<String>();
         this.enums = new ArrayList<String>();
@@ -80,7 +80,7 @@ public class CTagsBuilder implements ITopLevelInfoProvider {
 
         for (Map.Entry<String, SourceCodeTraversal.SourceCodeEntry> entry : entries.entrySet()) {
             if (entry.getValue().getValue() == null) continue;
-            CTagsEntry.generateFromEntry(this.tags, this, entry.getKey(), entry.getValue());
+            CTagsEntry.generateFromEntry(this.tags, this, entry.getKey(), entry.getValue(), baseDir);
         }
     }
 

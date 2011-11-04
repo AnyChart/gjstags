@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class CommandLineRunner {
 
-    private static final String VERSION = "1.0";
+    public static final String VERSION = "1.2";
 
     private static final String ERROR_NO_OUTPUT = "Error: No output file specified";
     private static final String ERROR_NO_INPUT = "Error: No valid inputs specified";
@@ -58,7 +58,10 @@ public class CommandLineRunner {
             "     Write tags to specified file. 'tags' by default.\n" +
             "  -o Alias for -f\n" +
             "  -r Find source files recursively.\n" +
+            "  -R alias for -r\n" +
+            "  -b base dir\n" +
             "  --recursive Alias for -r\n" +
+            "  --basedir Alias for -b\n" +
             "  --version Show version info.\n" +
             "  --license Show license.\n" +
             "  --help Show this help.\n";
@@ -74,6 +77,7 @@ public class CommandLineRunner {
         String outputFile = "tags";
         boolean appendTags = false;
         List<String> inputs = new ArrayList<String>();
+        String baseDir = null;
 
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
@@ -85,7 +89,7 @@ public class CommandLineRunner {
                 return;
             } else if (arg.equals("--license")) {
                 System.out.print(LICENSE);
-            } else if (arg.equals("-r") || arg.equals("--recursive")) {
+            } else if (arg.equals("-R") || arg.equals("-r") || arg.equals("--recursive")) {
                 isRecursive = true;
             } else if (arg.equals("-f") || arg.equals("-o")) {
                 if (i == (args.length - 1)) {
@@ -95,6 +99,10 @@ public class CommandLineRunner {
                 outputFile = args[++i];
             } else if (arg.equals("-a")) {
                 appendTags = true;
+            } else if (arg.equals("-b") || arg.equals("--basedir")) {
+                if (i < (args.length - 1)) {
+                    baseDir = args[++i];
+                }
             } else {
                 inputs.add(arg);
             }
@@ -128,7 +136,7 @@ public class CommandLineRunner {
 
         CTagsBuilder cTagsBuilder = new CTagsBuilder();
         cTagsBuilder.initAST(realInputFiles.toArray(new String[realInputFiles.size()]));
-        cTagsBuilder.parseCTags();
+        cTagsBuilder.parseCTags(baseDir);
 
         CTagsFile file;
         if (appendTags && new File(outputFile).exists()) {
