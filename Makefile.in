@@ -12,6 +12,7 @@ compile:
 install:
 	cp bin/gjstags $(PREFIX)/bin/gjstags
 	cp bin/gjstags.jar $(PREFIX)/bin/gjstags.jar
+	cp libs/compiler.jar $(PREFIX)/bin/compiler.jar
 
 clean:
 	rm -rf bin/*

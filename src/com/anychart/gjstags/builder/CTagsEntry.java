@@ -19,7 +19,7 @@ import com.anychart.gjstags.ctags.CTag;
 import com.anychart.gjstags.utils.SourceCodeTraversal;
 import com.google.javascript.jscomp.NodeUtil;
 import com.google.javascript.rhino.JSDocInfo;
-import sun.org.mozilla.javascript.internal.Token;
+import com.google.javascript.rhino.Token;
 
 import java.util.ArrayList;
 import java.util.List;
