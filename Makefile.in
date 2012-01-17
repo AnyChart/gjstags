@@ -14,6 +14,8 @@ install:
 	cp bin/gjstags.jar $(PREFIX)/bin/gjstags.jar
 	cp libs/compiler.jar $(PREFIX)/bin/compiler.jar
 	chmod go+x $(PREFIX)/bin/gjstags
+	chmod go+r $(PREFIX)/bin/gjstags.jar
+	chmod go+r $(PREFIX)/bin/compiler.jar
 
 clean:
 	rm -rf bin/*
