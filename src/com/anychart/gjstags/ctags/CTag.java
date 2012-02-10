@@ -15,6 +15,9 @@
  */
 package com.anychart.gjstags.ctags;
 
+import java.io.Writer;
+import java.io.IOException;
+
 /**
  * @author Aleksandr Batsuev (alex@batsuev.com)
  */
@@ -42,6 +45,15 @@ public class CTag {
 
     public String getCTagString() {
         return this.getName() + "\t" + this.getFile() + "\t" + this.getAddress() + this.getMeta() + "\n";
+
+    public void writeCTagString(Writer writer) throws IOException {
+        writer.write(this.getName());
+        writer.write('\t');
+        writer.write(this.getFile());
+        writer.write('\t');
+        writer.write(this.getAddress());
+        writer.write(this.getMeta());
+        writer.write('\n');
     }
 
     public static CTag fromString(String line) {
