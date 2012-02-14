@@ -18,6 +18,7 @@ package com.anychart.gjstags.ctags;
 import com.anychart.gjstags.CommandLineRunner;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -59,12 +60,11 @@ public class CTagsFile {
     }
 
     public void write(String fileName) throws IOException {
-        FileWriter writer = new FileWriter(fileName);
-        String tagsString = HEADER;
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        writer.write(HEADER);
         for (CTag tag : this.entries) {
-            tagsString += tag.getCTagString();
+            tag.writeCTagString(writer);
         }
-        writer.write(tagsString);
         writer.close();
     }
 
