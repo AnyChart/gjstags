@@ -19,7 +19,7 @@ JAVAC=javac
 JAR=jar
 
 options=$@
-arguments=($options)
+arguments=$options
 index=0
 for argument in $options
   do
