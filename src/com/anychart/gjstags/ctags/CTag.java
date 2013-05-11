@@ -45,6 +45,7 @@ public class CTag {
 
     public String getCTagString() {
         return this.getName() + "\t" + this.getFile() + "\t" + this.getAddress() + this.getMeta() + "\n";
+    }
 
     public void writeCTagString(Writer writer) throws IOException {
         writer.write(this.getName());
